@@ -13,7 +13,7 @@ def landing():
 
 @app.route('/register')
 def register():
-   return render_template('register.html')
+   return render_template('registration.html')
 
 
 @app.route('/register/user', methods=['POST'])
@@ -24,6 +24,7 @@ def register_user():
       'email': request.form['email'],
       'first_name': request.form['first_name'],
       'last_name': request.form['last_name'],
+      'birthday': request.form['birthday'],
       'password': bcrypt.generate_password_hash(request.form['password'])
    }
    id = User.save(data)
@@ -53,8 +54,7 @@ def dashboard():
    }
    user = User.get_user_by_id(data)
    users = User.get_all_users()
-   projects = Project.get_all_projects()
-   return render_template('dashboard.html', users=users, user=user, projects=projects)
+   return render_template('dashboard.html', users=users, user=user)
 
 
 @app.route('/logout')

@@ -21,9 +21,13 @@
          <!-- <a class='fs-6 float-end mt-2'href=""><small>forgot password</small></a> -->
          </div>
          <div class="card-body m-3">
-            {% with messages = get_flashed_messages() %} {% if messages %} {% formessage in messages %}
-            <p>{{message}}</p>
-            {% endfor %} {% endif %} {% endwith %}
+            {% with messages = get_flashed_messages() %} 
+               {% if messages %} 
+                  {% for message in messages %}
+                     <p>{{message}}</p>
+                  {% endfor %} 
+               {% endif %}
+            {% endwith %}
          <form action="/login/user" method="post">
             <div class="form-floating mb-3">
                <input

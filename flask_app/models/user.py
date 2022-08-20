@@ -7,14 +7,14 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 
 class User:
-   db = 'soloProjectBugTracker'
+   db = 'horoscopesRUs'
 
    def __init__(self, data):
       self.id = data['id']
       self.email = data['email']
       self.first_name = data['first_name']
       self.last_name = data['last_name']
-      self.birthay = data['birthday']
+      self.birthday = data['birthday']
       self.password = data['password']
 
    @classmethod
