@@ -15,11 +15,15 @@ class User:
       self.first_name = data['first_name']
       self.last_name = data['last_name']
       self.birthday = data['birthday']
+      self.birthmonth = data['birthmonth']
+      self.birthyear = data['birthyear']
       self.password = data['password']
+      self.astrologicalSign = data['astrologicalSign']
+
 
    @classmethod
    def save(cls, data):
-      query = "INSERT into users (email, first_name, last_name, birthday, password) VALUES (%(email)s,%(first_name)s,%(last_name)s, %(birthday)s, %(password)s);"
+      query = "INSERT into users (email, first_name, last_name, birthday, birthmonth, birthyear, password, astrologicalSign) VALUES (%(email)s,%(first_name)s,%(last_name)s, %(birthday)s, %(birthmonth)s, %(birthyear)s, %(password)s, %(astrologicalSign)s;"
       return connectToMySQL(cls.db).query_db(query, data)
 
    @classmethod
@@ -66,7 +70,13 @@ class User:
          flash("Last name cannot be blank.")
       if len(user['birthday']) < 6:
          is_valid = False
-         flash("Birthday cannot be blank.")
+         flash("Birth day cannot be blank.")
+      if len(user['birthmonth']) < 6:
+         is_valid = False
+         flash("Birt month cannot be blank.")
+      if len(user['birthyear']) < 6:
+         is_valid = False
+         flash("Birt year cannot be blank.")
       if len(user['password']) < 8:
          is_valid = False
          flash("Password must be atleast 8 characters long.")
