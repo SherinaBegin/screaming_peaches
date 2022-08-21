@@ -18,11 +18,12 @@ def register():
 
 @app.route('/register/user', methods=['POST'])
 def register_user():
+
    if not User.validate_user(request.form):
       return redirect('/register')
-   day= request.form['bithday']
+   day= request.form['birthday']
    month = request.form['birthmonth']
-   astrological_sign = get_astrological_sign(day, month)
+   sign_id = get_astrological_sign(day, month)
 
    data = {
       'email': request.form['email'],
@@ -31,11 +32,12 @@ def register_user():
       'birthday': request.form['birthday'],
       'birthmonth': request.form['birthmonth'],
       'birthyear': request.form['birthyear'],
-      'astrologicalSign_id': astrological_sign,
+      'astrologicalSign_id': sign_id,
       'password': bcrypt.generate_password_hash(request.form['password'])
    }
-   id = User.save(data)
-   session['user_id'] = id
+   User.save(data)
+   user = User.get_user_by_email(data)
+   session['user_id'] = user.id
    return redirect('/dashboard')
 
 
@@ -70,67 +72,65 @@ def logout():
    return redirect('/')
 
 def get_astrological_sign(day,month):
+   print("you are in the get_astro_sign function")
    #ADDING ASTROLOGICAL SIGN TO USER
-   day= request.form['bithday']
-   month = request.form['birthmonth']
-   if(month == 1):
-      if(day < 20):
-         astrological_sign = 1
+   if(int(month) == 1):
+      if(int(day) < 20):
+         return 1
       else:
-         astrological_sign = 2
-   elif(month == 2):
-      if(day < 19):
-         astrological_sign = 2
+         return 2
+   elif(int(month) == 2):
+      if(int(day) < 19):
+         return 2
       else:
-         astrological_sign = 3
-   elif(month == 3):
-      if(day < 21):
-         astrological_sign = 3
+         return 3
+   elif(int(month) == 3):
+      if(int(day) < 21):
+         return 3
       else:
-         astrological_sign = 4
-   elif(month == 4):
-      if(day < 20):
-         astrological_sign = 4
+         return 4
+   elif(int(month) == 4):
+      if(int(day) < 20):
+         return 4
       else:
-         astrological_sign = 5
-   elif(month == 5):
-      if(day < 21):
-         astrological_sign = 5
+         return 5
+   elif(int(month) == 5):
+      if(int(day) < 21):
+         return 5
       else:
-         astrological_sign = 6
-   elif(month == 6):
-      if(day < 21):
-         astrological_sign = 6
+         return 6
+   elif(int(month) == 6):
+      if(int(day) < 21):
+         return 6
       else:
-         astrological_sign = 7
-   elif(month == 7):
-      if(day < 23):
-         astrological_sign = 7
+         return 7
+   elif(int(month) == 7):
+      if(int(day) < 23):
+         return 7
       else:
-         astrological_sign = 8
-   elif(month == 8):
-      if(day < 23):
-         astrological_sign = 8
+         return 8
+   elif(int(month) == 8):
+      if(int(day) < 23):
+         return 8
       else:
-         astrological_sign = 9
-   elif(month == 9):
-      if(day < 23):
-         astrological_sign = 9
+         return 9
+   elif(int(month) == 9):
+      if(int(day) < 23):
+         return 9
       else:
-         astrological_sign = 10
-   elif(month == 10):
-      if(day < 23):
-         astrological_sign = 10
+         return 10
+   elif(int(month) == 10):
+      if(int(day) < 23):
+         return 10
       else:
-         astrological_sign = 11
-   elif(month == 11):
-      if(day < 22):
-         astrological_sign = 11
+         return 11
+   elif(int(month) == 11):
+      if(int(day) < 22):
+         return 11
       else:
-         astrological_sign = 12
-   elif(month == 12):
-      if(day < 22):
-         astrological_sign = 12
+         return 12
+   elif(int(month) == 12):
+      if(int(day) < 22):
+         return 12
       else:
-         astrological_sign = 1
-   return astrological_sign
+         return 1
