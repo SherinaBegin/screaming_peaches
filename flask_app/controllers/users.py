@@ -36,9 +36,8 @@ def register_user():
       'astrologicalSign_id': sign_id,
       'password': bcrypt.generate_password_hash(request.form['password'])
    }
-   User.save(data)
-   user = User.get_user_by_email(data)
-   session['user_id'] = user.id
+   id = User.save(data)
+   session['user_id'] = id
    return redirect('/dashboard')
 
 
@@ -66,7 +65,6 @@ def dashboard():
    sign_data = {
       'id': user.astrologicalSign_id
    }
-   
    user = User.get_user_by_id(data)
    horoscope = Sign.get_by_id(sign_data)
    start_month = get_month(horoscope.start_month)
