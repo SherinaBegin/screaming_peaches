@@ -25,7 +25,7 @@
                         <a class="nav-link active linkColor" aria-current="page" href="/dashboard">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link linkColor" href="#">Chat Group</a>
+                        <a class="nav-link linkColor" href="/chatroom/{{user.astrologicalSign_id}}">Chat Group</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link linkColor" href="/signs">Astrological Signs</a>
@@ -38,8 +38,22 @@
         </div>
     </nav>
 
-    <div>
-        <p>ADD TABLE TO VIEW THE COMMENT AND THE OPTIONS TO EDIT AND DELETE</p>
+    <div class="container">
+        <div class="card-body">
+                {% for user in users %}
+                    {% if user.id == comment.user_id%}
+                <div class="mb-3">
+                    <h6 class="card-subtitle text-muted"> {{user.first_name}} {{user.last_name}} said {{comment.time_span()}}:</h6>
+                    <p class="card-text ms-4">{{comment.comment}}</p>
+                    {% if user.id == session.user_id%}
+                    <a class="btn btn-primary btn-sm" href="/delete/comment/{{comment.id}}">Delete</a> 
+                    <a class="btn btn-primary btn-sm" href="/edit/comment/{{comment.id}}">Edit</a> 
+                    {% endif %}
+                </div>
+                    {% endif %}
+                {% endfor%}
+            </div>
+
     </div>
 </body>
 </html>

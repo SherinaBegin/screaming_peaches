@@ -32,14 +32,85 @@
                     </li>
                 </ul>
                 <span class="navbar-text">
-                    <a class="nav-link active linkColor" aria-current="page" href="#">Logout</a>
+                    <a class="nav-link active linkColor" aria-current="page" href="/logout">Logout</a>
                 </span>
             </div>
         </div>
     </nav>
 
     <div>
-        <p>ADD EVERYTHING ABOUT CHAT ROOM</p>
+        <div class="container">
+            <div class="row m-5">
+                <div class="col-sm-5">
+                    <div class="card">
+                        <div class="card-title card-header fs-3"> 
+                            <div style="text-align: center;">
+                                {% if horoscope.id == 1 %}
+                                   <h3>Capricorn Chat Room</h3>
+                                {% elif horoscope.id == 2 %}
+                                   <h3>Aquarius Chat Room</h3>
+                                {% elif horoscope.id == 3 %}
+                                   <h3>Pisces Chat Room</h3>
+                                {% elif horoscope.id == 4 %}
+                                   <h3>Aries Chat Room</h3>
+                                {% elif horoscope.id == 5 %}
+                                   <h3>Taurus Chat Room</h3>
+                                {% elif horoscope.id == 6 %}
+                                   <h3>Gemini Chat Room</h3>
+                                {% elif horoscope.id == 7 %}
+                                   <h3>Cancer Chat Room</h3>
+                                {% elif horoscope.id == 8 %}
+                                   <h3>Leo Chat Room</h3>
+                                {% elif horoscope.id == 9 %}
+                                   <h3>Virgo Chat Room</h3>
+                                {% elif horoscope.id == 10 %}
+                                   <h3>Libra Chat Room</h3>
+                                {% elif horoscope.id == 11 %}
+                                   <h3>Scorpio Chat Room</h3>
+                                {% elif horoscope.id == 12 %}
+                                   <h3>Sagittarius Chat Room</h3>
+                                {% endif %}
+                        </div>
+                        <div class="card-body">
+                        {% for comment in comments %} 
+                            {% for user in users %}
+                                {% if user.id == comment.user_id%}
+                            <div class="mb-3">
+                                <h6 class="card-subtitle text-muted"> {{user.first_name}} {{user.last_name}} said {{comment.time_span()}}:</h6>
+                                <p class="card-text ms-4">{{comment.comment}}</p>
+                                <a href="/view/comment/{{comment.id}}" class="btn btn-primary btn-sm">View</a>
+                            </div>
+                                {% endif %}
+                            {% endfor%}
+                        {% endfor %} 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="card">
+                        <div class="card-body">
+                            {% with messages = get_flashed_messages() %} 
+                            {% if messages %} 
+                                {% for message in messages %}
+                                    <p>{{message}}</p>
+                                {% endfor %} 
+                            {% endif %}
+                         {% endwith %}
+                            <h5 class="card-title">Add Comment:</h5>
+                            <form action="/chatroom/add_comment/{{user.astrologicalSign_id}}" method="post">
+                            <input type="hidden" name="user_id" value="{{user.id}}"> 
+                            <div class="mb-3">
+                                <textarea class="form-control" id="comment" name='comment' rows="3" placeholder="max 255 characters"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <input type="submit" class="btn btn-outline-info" value="Send">
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
