@@ -24,7 +24,7 @@ class Sign:
         self.top_love = data['top_love']
         self.start_day = data['start_day']
         self.start_month = data['start_month']
-        self.end_day = data['end_year']
+        self.end_day = data['end_day']
         self.end_month = data['end_month']
 
     # @classmethod
@@ -35,7 +35,7 @@ class Sign:
     @classmethod
     def get_by_id(cls, data):
         query = "SELECT * FROM astrologicalSigns WHERE id = %(id)s;"
-        results = connectToMySQL(cls.db).query_db(query, data)
+        results = connectToMySQL(Sign.db).query_db(query, data)
         if len(results) < 1:
             return False
         return cls(results[0])
@@ -43,7 +43,7 @@ class Sign:
     @classmethod
     def get_all_signs(cls):
         query = 'SELECT * FROM astrologicalSigns;'
-        results = connectToMySQL(cls.db).query_db(query)
+        results = connectToMySQL(Sign.db).query_db(query)
         signs = []
         for sign in results:
             signs.append(cls(sign))

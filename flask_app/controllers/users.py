@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, session, flash
 
 from flask_app import app
 from flask_app.models.user import User
+from flask_app.models.sign import Sign
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -62,8 +63,16 @@ def dashboard():
       'id': session['user_id']
    }
    user = User.get_user_by_id(data)
+   sign_data = {
+      'id': user.astrologicalSign_id
+   }
+   
+   user = User.get_user_by_id(data)
+   horoscope = Sign.get_by_id(sign_data)
+   start_month = get_month(horoscope.start_month)
+   end_month = get_month(horoscope.end_month)
    users = User.get_all_users()
-   return render_template('dashboard.html', users=users, user=user)
+   return render_template('dashboard.html', users=users, user=user, horoscope=horoscope, start_month=start_month, end_month=end_month)
 
 
 @app.route('/logout')
@@ -134,3 +143,29 @@ def get_astrological_sign(day,month):
          return 12
       else:
          return 1
+
+def get_month(num):
+   if num == 1:
+      return "January"
+   if num == 2:
+      return "February"
+   if num == 3:
+      return "March"
+   if num == 4:
+      return "April"
+   if num == 5:
+      return "May"
+   if num == 6:
+      return "June"
+   if num == 7:
+      return "July"
+   if num == 8:
+      return "August"
+   if num == 9:
+      return "September"
+   if num == 10:
+      return "October"
+   if num == 11:
+      return "November"
+   if num == 12:
+      return "December"

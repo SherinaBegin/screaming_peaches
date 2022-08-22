@@ -1,0 +1,16 @@
+.backgroundColor {
+    background-color: rgb(57, 57, 67);
+    color: white;
+}
+
+.linkColor{
+    color: white;
+}
+
+.astrologyLinkColor{
+    color: rgb(235, 235, 55);
+}
+
+a:hover {
+    color: rgb(235, 235, 55);
+}
