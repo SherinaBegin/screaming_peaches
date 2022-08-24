@@ -13,7 +13,7 @@
    <link rel="stylesheet" href="{{ url_for('static', filename='/css/dashboard.css') }}">
    <title>Dashboard</title>
 </head>
-<body>
+<body style="background-color: rgb(219, 219, 254);">
    <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid backgroundColor" >
          <a class="navbar-brand astrologyLinkColor" href="/dashboard">Astrology Us</a>
@@ -41,82 +41,86 @@
    <div class="container">
       <h2>Hello {{user.first_name}}!!</h2>
    </div>
-   <div class="table_container">
-      <div style="text-align: center;">
-         {% if horoscope.id == 1 %}
-            <h3>Capricorn</h3>
-         {% elif horoscope.id == 2 %}
-            <h3>Aquarius</h3>
-         {% elif horoscope.id == 3 %}
-            <h3>Pisces</h3>
-         {% elif horoscope.id == 4 %}
-            <h3>Aries</h3>
-         {% elif horoscope.id == 5 %}
-            <h3>Taurus</h3>
-         {% elif horoscope.id == 6 %}
-            <h3>Gemini</h3>
-         {% elif horoscope.id == 7 %}
-            <h3>Cancer</h3>
-         {% elif horoscope.id == 8 %}
-            <h3>Leo</h3>
-         {% elif horoscope.id == 9 %}
-            <h3>Virgo</h3>
-         {% elif horoscope.id == 10 %}
-            <h3>Libra</h3>
-         {% elif horoscope.id == 11 %}
-            <h3>Scorpio</h3>
-         {% elif horoscope.id == 12 %}
-            <h3>Sagittarius</h3>
-         {% endif %}
+   <div class="row ms-5">
+      <div class="table_container col">
+         <div style="text-align: center;">
+            {% if horoscope.id == 1 %}
+               <h3>Capricorn</h3>
+            {% elif horoscope.id == 2 %}
+               <h3>Aquarius</h3>
+            {% elif horoscope.id == 3 %}
+               <h3>Pisces</h3>
+            {% elif horoscope.id == 4 %}
+               <h3>Aries</h3>
+            {% elif horoscope.id == 5 %}
+               <h3>Taurus</h3>
+            {% elif horoscope.id == 6 %}
+               <h3>Gemini</h3>
+            {% elif horoscope.id == 7 %}
+               <h3>Cancer</h3>
+            {% elif horoscope.id == 8 %}
+               <h3>Leo</h3>
+            {% elif horoscope.id == 9 %}
+               <h3>Virgo</h3>
+            {% elif horoscope.id == 10 %}
+               <h3>Libra</h3>
+            {% elif horoscope.id == 11 %}
+               <h3>Scorpio</h3>
+            {% elif horoscope.id == 12 %}
+               <h3>Sagittarius</h3>
+            {% endif %}
+         </div>
+         <table class="table">
+            <thead>
+               <tr>
+                  <th scope="col">{{start_month}} {{horoscope.start_day}} - {{end_month}} {{horoscope.end_day}}</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <th scope="row">Element: </th>
+                  <td>{{horoscope.element}}</td>
+               </tr>
+               <tr>
+                  <th scope="row">Polarity</th>
+                  <td>{{horoscope.polarity}}</td>
+               </tr>
+               <tr>
+                  <th scope="row">Quality</th>
+                  <td colspan="2">{{horoscope.quality}}</td>
+               </tr>
+               <tr>
+                  <th scope="row">Rulling Planet:</th>
+                  <td>{{horoscope.rulling_planet}}</td>
+               </tr>
+               <tr>
+                  <th scope="row">Rulling House:</th>
+                  <td>{{horoscope.rulling_house}}</td>
+               </tr>
+               <tr>
+                  <th scope="row">Spirit Color:</th>
+                  <td>{{horoscope.spirit_color}}</td>
+               </tr>
+               <tr>
+                  <th scope="row">Lucky Gem:</th>
+                  <td>{{horoscope.lucky_gem}}</td>
+               </tr>
+               <tr>
+                  <th scope="row">Flower:</th>
+                  <td>{{horoscope.flower}}</td>
+               </tr>
+               <tr>
+                  <th scope="row">Top Love Matches: </th>
+                  <td>{{horoscope.top_love}}</td>
+               </tr>
+            </tbody>
+         </table>
       </div>
-      <table class="table">
-         <thead>
-            <tr>
-
-               <th scope="col">{{start_month}} {{horoscope.start_day}} - {{end_month}} {{horoscope.end_day}}</th>
-            </tr>
-         </thead>
-         <tbody>
-            <tr>
-               <th scope="row">Element: </th>
-               <td>{{horoscope.element}}</td>
-            </tr>
-            <tr>
-               <th scope="row">Polarity</th>
-               <td>{{horoscope.polarity}}</td>
-            </tr>
-            <tr>
-               <th scope="row">Quality</th>
-               <td colspan="2">{{horoscope.quality}}</td>
-            </tr>
-            <tr>
-               <th scope="row">Rulling Planet:</th>
-               <td>{{horoscope.rulling_planet}}</td>
-            </tr>
-            <tr>
-               <th scope="row">Rulling House:</th>
-               <td>{{horoscope.rulling_house}}</td>
-            </tr>
-            <tr>
-               <th scope="row">Spirit Color:</th>
-               <td>{{horoscope.spirit_color}}</td>
-            </tr>
-            <tr>
-               <th scope="row">Lucky Gem:</th>
-               <td>{{horoscope.lucky_gem}}</td>
-            </tr>
-            <tr>
-               <th scope="row">Flower:</th>
-               <td>{{horoscope.flower}}</td>
-            </tr>
-            <tr>
-               <th scope="row">Top Love Matches: </th>
-               <td>{{horoscope.top_love}}</td>
-            </tr>
-         </tbody>
-      </table>
+      <div class="col img-fluid ms-5 mt-5">
+         <img src="static/images/{{horoscope.id}}.0.png" alt="">
+      </div>
    </div>
-
+ 
 
 
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 

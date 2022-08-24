@@ -56,7 +56,7 @@ def edit_comment(comment_id):
         'id': session['user_id']
     }
     comment = Comment.get_comment_by_id(data)
-    return render_template('edit_comment.html', comment = comment, users = User.get_all_users())
+    return render_template('edit_comment.html', comment = comment, users = User.get_all_users(), user = User.get_user_by_id(user_data), )
 
 @app.route('/update/comment/<int:comment_id>', methods=['POST'])
 def update_comment(comment_id):
@@ -74,3 +74,4 @@ def delete_project(comment_id):
     }
     Comment.delete_comment(data)
     return redirect('/dashboard')
+
